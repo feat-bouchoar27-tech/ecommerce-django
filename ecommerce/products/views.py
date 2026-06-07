@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import View
 from .models import Product, Category
 
 def product_list(request):
@@ -17,3 +18,7 @@ def category_detail(request, pk):
     category = get_object_or_404(Category, id=pk)
     products = category.products.all()
     return render(request, 'category_detail.html', {'category': category, 'products': products})
+
+class ProductView(View):
+    def get(self, request):
+        return render(request, "products.html", {'produits': ['HP', 'Dell', 'Lenovo', 'Asus']})
